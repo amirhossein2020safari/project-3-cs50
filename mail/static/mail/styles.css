@@ -1,0 +1,17 @@
+textarea {
+    min-height: 400px;
+}
+
+.error {
+    color: red;
+    font-weight: 600;
+}
+
+.email-card-style{
+    display: flex;
+    margin: 10px;
+    text-align: center;
+    justify-content: space-around;
+    align-items: baseline;
+    cursor: pointer;
+}

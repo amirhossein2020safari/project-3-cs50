@@ -1,0 +1,87 @@
+{% extends "mail/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <h2>{{ request.user.email }}</h2>
+
+    <button class="btn btn-sm btn-outline-primary" id="inbox">Inbox</button>
+    <button class="btn btn-sm btn-outline-primary" id="compose">Compose</button>
+    <button class="btn btn-sm btn-outline-primary" id="sent">Sent</button>
+    <button class="btn btn-sm btn-outline-primary" id="archived">Archived</button>
+    <a class="btn btn-sm btn-outline-primary" href="{% url 'logout' %}">Log Out</a>
+    <hr>
+
+
+    <div id="emails-view">
+    </div>
+    <div id="email-card">
+    </div>
+
+    <div id="email-content-view">
+        <form id="email-content-view-form">
+            <div class="form-group">
+                From: <input disabled class="form-control" id="email-content-view-from">
+            </div>
+            <div class="form-group">
+                To: <input disabled class="form-control" id="email-content-view-form-to" value="{{ request.user.email }}">
+                <div class="error" id="error-compose-form-view">
+                </div>
+            </div>
+            <div class="form-group">
+                Time: <input disabled class="form-control" id="email-content-time" placeholder="Time">
+            </div>
+            <div class="form-group">
+                Subject: <input disabled class="form-control" id="email-content-subject" placeholder="Subject">
+            </div>
+            <textarea disabled class="form-control" id="email-content-body" placeholder="Content"></textarea>
+            
+            <button type='button' class="btn btn-primary" id="replay-email-content">Reply</button>
+            
+            <button type="button" class="btn" id="archive-email-content"></button>
+        </form>
+    </div>
+
+    <div id="compose-view">
+        <h3>New Email</h3>
+        <form id="compose-form">
+            <div class="form-group">
+                From: <input disabled class="form-control" value="{{ request.user.email }}">
+            </div>
+            <div class="form-group">
+                To: <input id="compose-recipients" class="form-control">
+                <div class="error" id="error-compose-form_new">
+                </div>
+            </div>
+            <div class="form-group">
+                <input class="form-control" id="compose-subject" placeholder="Subject">
+            </div>
+            <textarea class="form-control" id="compose-body" placeholder="Write your mail..."></textarea>
+            <input type="submit" class="btn btn-primary" id="reply-email-compose" value="Submit"/>
+        </form>
+    </div>
+
+    <div id="compose-view-reply">
+        <form id="compose-form-reply">
+            <div class="form-group">
+                From: <input disabled class="form-control" value="{{ request.user.email }}">
+            </div>
+            <div class="form-group">
+                To: <input disabled id="compose-recipients-reply" class="form-control">
+                <div class="error" id="error-compose-form-reply">
+                </div>
+            </div>
+            <div class="form-group">
+                Subject: <input disabled class="form-control" id="compose-subject-reply" placeholder="Subject">
+            </div>
+            <textarea disabled class="form-control" id="compose-body-previous-reply" 
+                style="min-height: auto; margin-bottom: 1rem;" placeholder="previous email"></textarea>
+
+            <textarea class="form-control" id="compose-body-reply" placeholder="Write your reply..."></textarea>
+            <input type="submit" class="btn btn-primary" id="email-compose-reply" value="Submit"/>
+        </form>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'mail/inbox.js' %}"></script>
+{% endblock %}
